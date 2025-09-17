@@ -7,12 +7,15 @@ use App\Filament\Resources\TransactionItems\Pages\EditTransactionItems;
 use App\Filament\Resources\TransactionItems\Pages\ListTransactionItems;
 use App\Filament\Resources\TransactionItems\Schemas\TransactionItemsForm;
 use App\Filament\Resources\TransactionItems\Tables\TransactionItemsTable;
+use App\Filament\Resources\Transactions\TransactionResource;
 use App\Models\TransactionItems;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Support\Htmlable;
 
 class TransactionItemsResource extends Resource
 {
@@ -21,6 +24,30 @@ class TransactionItemsResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'id';
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false;
+    }
+
+    protected static ?string $parentResource = TransactionResource::class;
+
+    public static function getRecordTitle(?Model $record): string|Htmlable|null
+    {
+        return $record?->id;
+    }
+
+    // function tidak bisa edit
+    public static function canEdit(Model $record): bool
+    {
+        return false;
+    }
+
+    // function tidak bisa create
+    public static function canCreate(): bool
+    {
+        return false;
+    }
 
     public static function form(Schema $schema): Schema
     {
@@ -43,8 +70,7 @@ class TransactionItemsResource extends Resource
     {
         return [
             'index' => ListTransactionItems::route('/'),
-            'create' => CreateTransactionItems::route('/create'),
-            'edit' => EditTransactionItems::route('/{record}/edit'),
+
         ];
     }
 }
