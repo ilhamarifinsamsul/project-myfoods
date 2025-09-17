@@ -17,21 +17,19 @@ class FoodsTable
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),
-                TextColumn::make('description')
-                    ->searchable(),
                 ImageColumn::make('image'),
                 TextColumn::make('price')
-                    ->money()
+                    ->money('IDR')
                     ->sortable(),
                 TextColumn::make('price_afterdiscount')
-                    ->searchable(),
-                TextColumn::make('percent')
-                    ->searchable(),
-                TextColumn::make('is_promo')
-                    ->searchable(),
-                TextColumn::make('categories_id')
-                    ->numeric()
+                    ->money('IDR')
                     ->sortable(),
+                TextColumn::make('percent')
+                    ->sortable(),
+                TextColumn::make('is_promo')
+                    ->sortable(),
+                TextColumn::make('categories.name')
+                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
