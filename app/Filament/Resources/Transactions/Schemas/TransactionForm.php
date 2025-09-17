@@ -13,6 +13,8 @@ class TransactionForm
             ->components([
                 TextInput::make('code')
                     ->required(),
+                TextInput::make('name')
+                    ->required(),
                 TextInput::make('phone')
                     ->tel()
                     ->required(),
