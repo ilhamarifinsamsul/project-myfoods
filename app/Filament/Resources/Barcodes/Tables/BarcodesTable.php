@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Barcodes\Tables;
 
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -16,13 +17,14 @@ class BarcodesTable
         return $table
             ->columns([
                 TextColumn::make('table_number')
+                    ->label('Table Number')
                     ->searchable(),
-                ImageColumn::make('image'),
+                // ImageColumn::make('image'),
                 TextColumn::make('qr_value')
                     ->searchable(),
-                TextColumn::make('users_id')
-                    ->numeric()
-                    ->sortable(),
+                TextColumn::make('users.name')
+                    ->label('User Name')
+                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -36,7 +38,16 @@ class BarcodesTable
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                // EditAction::make(),
+                Action::make('download')
+                ->label('Download QR Code')
+                ->icon('heroicon-o-arrow-down-tray') // Fixed icon name
+                ->action(function ($record) {
+                    $filePath = storage_path('app/public/'. $record->image);
+                    if (file_exists($filePath)) {
+                        return response()->download($filePath);
+                    }
+                }),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

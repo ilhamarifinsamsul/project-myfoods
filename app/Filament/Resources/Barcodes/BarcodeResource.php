@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Barcodes;
 use App\Filament\Resources\Barcodes\Pages\CreateBarcode;
 use App\Filament\Resources\Barcodes\Pages\EditBarcode;
 use App\Filament\Resources\Barcodes\Pages\ListBarcodes;
+use App\Filament\Resources\Barcodes\Pages\CreateQR; // Fixed namespace
 use App\Filament\Resources\Barcodes\Schemas\BarcodeForm;
 use App\Filament\Resources\Barcodes\Tables\BarcodesTable;
 use App\Models\Barcode;
@@ -43,7 +44,7 @@ class BarcodeResource extends Resource
     {
         return [
             'index' => ListBarcodes::route('/'),
-            'create' => CreateBarcode::route('/create'),
+            'create' => CreateQR::route('/create'), // Using CreateQR instead of CreateBarcode
             'edit' => EditBarcode::route('/{record}/edit'),
         ];
     }
