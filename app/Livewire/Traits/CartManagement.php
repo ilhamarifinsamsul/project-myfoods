@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Traits;
 
+// untuk mengelola cart/keranjang
 trait CartManagement {
     // function incrementQuantity
     public function increment($index) {

@@ -28,6 +28,7 @@ class HomePage extends Component
         $this->favorites = $foods->getFavoriteFood();
         $this->tableNumber = session('table_number');
 
+        // Check if customer data is complete
         $name = session('name');
         $phone = session('phone');
 
@@ -50,6 +51,7 @@ class HomePage extends Component
     #[Layout('components.layouts.page')]
     public function render(Foods $foods)
     {
+        // ketika search data butuh waktu untuk load data 1 detik
         sleep(1);
         $searchResult = $foods->search(trim($this->term))->get();
 

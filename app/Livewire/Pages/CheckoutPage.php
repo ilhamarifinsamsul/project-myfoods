@@ -11,9 +11,10 @@ use Livewire\Attributes\Layout;
 
 class CheckoutPage extends Component
 {
+    // untuk memfungsikan cart/keranjang
     use CartManagement;
 
-    // define public properties
+    // deklarasi variabel
     public $name;
     public $phone;
     #[Session(key: 'table_number')]
@@ -34,7 +35,7 @@ class CheckoutPage extends Component
 
     #[On('saved-user-info')]
 
-    // function mount
+    // function mount/menyimpan session
     public function mount(){
         $this->name = session('name');
         $this->phone = session('phone');

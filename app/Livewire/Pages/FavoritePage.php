@@ -13,6 +13,7 @@ class FavoritePage extends Component
 {
     use CategoryFilterTrait;
 
+    // deklarasi variabel
     public $categories;
     public $selectedCategories = [];
     public $items;

@@ -7,7 +7,6 @@ use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\Attributes\Session;
 
-use function Termwind\ask;
 
 class CartPage extends Component
 {
@@ -21,15 +20,17 @@ class CartPage extends Component
 
     public $selectedItems = [];
 
-    // seesion Livewire
+    // Ketika pilih makanan di cart, maka akan disimpan di session
     #[Session(key: 'cart_items')]
     public $cartItems = [];
+    // Untuk menandai apakah ada transaksi yang belum dibayar, maka akan disimpan di session
     #[Session(key: 'has_unpaid_transaction')]
     public $hasUnpaidTransaction;
 
     // function mount
     public function mount()
     {
+        // ketika menambah makanan, maka akan mengupdate cartItems
         $this->updateSelectedItems();
     }
 
@@ -52,7 +53,7 @@ class CartPage extends Component
         session(['has_unpaid_transaction' => false]);
     }
 
-    // function deleteSelected
+    // function deleteSelected, bisa pilih makanan dan menghapus makanan yang dipilih
     public function deleteSelected()
     {
         $this->cartItems = collect($this->cartItems)->filter(fn ($item) => !$item['seelected'])->toArray();
