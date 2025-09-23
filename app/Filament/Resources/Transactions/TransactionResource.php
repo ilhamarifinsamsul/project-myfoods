@@ -2,6 +2,12 @@
 
 namespace App\Filament\Resources\Transactions;
 
+use App\Filament\Resources\TransactionItems\Pages\CreateTransactionItems;
+use App\Filament\Resources\TransactionItems\Pages\EditTransactionItems;
+use App\Filament\Resources\TransactionItems\Pages\ListTransactionItems;
+
+use App\Models\TransactionItems;
+
 use App\Filament\Resources\Transactions\Pages\CreateTransaction;
 use App\Filament\Resources\Transactions\Pages\EditTransaction;
 use App\Filament\Resources\Transactions\Pages\ListTransactions;
@@ -14,13 +20,28 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Support\Facades\Route;
+
 class TransactionResource extends Resource
 {
     protected static ?string $model = Transaction::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::CreditCard;
+
 
     protected static ?string $recordTitleAttribute = 'id';
+
+    public static function getRecordTitle(?Model $record): string|Htmlable|null
+    {
+        return $record?->name;
+    }
+
+    public static function canEdit(Model $record): bool
+    {
+        return false;
+    }
 
     public static function form(Schema $schema): Schema
     {

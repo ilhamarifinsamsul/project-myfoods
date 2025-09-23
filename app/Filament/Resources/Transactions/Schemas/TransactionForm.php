@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Transactions\Schemas;
 
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
@@ -22,12 +23,19 @@ class TransactionForm
                     ->required(),
                 TextInput::make('checkout_link')
                     ->required(),
-                TextInput::make('barcodes_id')
-                    ->required()
-                    ->numeric(),
+                FileUpload::make('barcodes_id')
+                    ->label('QR Code')
+                    ->image()
+                    ->directory('qr_code') // direktori penyimpanan
+                    ->disk('public') // disk penyimpanan
+                    ->default(function ($record) {
+                        return $record->barcodes->image ?? null;
+                    }),
                 TextInput::make('payment_method')
+                    ->required()
                     ->default(null),
                 TextInput::make('payment_status')
+                    ->required()
                     ->default(null),
                 TextInput::make('subtotal')
                     ->required()

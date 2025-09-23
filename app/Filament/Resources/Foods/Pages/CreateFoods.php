@@ -8,6 +8,7 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateFoods extends CreateRecord
 {
     protected static string $resource = FoodsResource::class;
+    protected static ?string $title = 'Create a food';
 
     protected function getRedirectUrl(): string
     {

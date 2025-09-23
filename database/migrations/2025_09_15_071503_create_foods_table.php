@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('foods', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
+            $table->text('description');
             $table->string('image');
             $table->integer('price');
             $table->string('price_afterdiscount')->nullable();
             $table->string('percent')->nullable();
-            $table->string('is_promo')->nullable();
+            $table->boolean('is_promo')->nullable();
             $table->foreignId('categories_id')->constrained('categories')->onDelete('cascade');
             $table->timestamps();
         });

@@ -61,6 +61,6 @@ Route::controller(QRController::class)->group(function() {
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });

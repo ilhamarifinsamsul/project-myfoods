@@ -22,6 +22,7 @@ class BarcodesTable
                 // ImageColumn::make('image'),
                 TextColumn::make('qr_value')
                     ->searchable(),
+                ImageColumn::make('image'),
                 TextColumn::make('users.name')
                     ->label('User Name')
                     ->searchable(),
@@ -47,6 +48,8 @@ class BarcodesTable
                     if (file_exists($filePath)) {
                         return response()->download($filePath);
                     }
+
+                    session()->flash('error', 'QR Code image not found.');
                 }),
             ])
             ->toolbarActions([

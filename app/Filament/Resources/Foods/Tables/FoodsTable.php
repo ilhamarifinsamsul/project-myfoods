@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Foods\Tables;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -30,9 +31,9 @@ class FoodsTable
                 TextColumn::make('percent')
                     ->label('Discount (%)')
                     ->sortable(),
-                TextColumn::make('is_promo')
+                IconColumn::make('is_promo')
                     ->label('Is Promo')
-                    ->sortable(),
+                    ->boolean(),
                 TextColumn::make('categories.name')
                     ->label('Category')
                     ->searchable(),

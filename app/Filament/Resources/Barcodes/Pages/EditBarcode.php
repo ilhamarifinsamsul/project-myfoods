@@ -9,6 +9,7 @@ use Filament\Resources\Pages\EditRecord;
 class EditBarcode extends EditRecord
 {
     protected static string $resource = BarcodeResource::class;
+    protected static ?string $title = 'Edit QR Code';
 
     protected function getHeaderActions(): array
     {
